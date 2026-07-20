@@ -28,23 +28,23 @@ class Solution:
         # (Forward Pass) linear+relu+predictions+loss
         # ----------------------------------------------------
         z1 = w1 @ x + b1
-        a1 = np.maximum(0 , z1)
+        a1 = np.maximum(0 , z1) #relue
         predictions = w2 @ a1 + b2
         Loss = np.mean((predictions - y_true)**2)
         print('done')
         # ----------------------------------------------------
         # (Backward Pass) d_pred + d
         # ----------------------------------------------------
-        n = len(y_true)
+        n = len(y_true) #deriviate the loss by predictions
         d_pred  = (2/n)* (predictions-y_true)
 
-        db2 = d_pred
-        dw2 = np.outer(d_pred, a1)
+        db2 = d_pred #deriviate of the loss by b2
+        dw2 = np.outer(d_pred, a1) #deriviate of the loss by w2
          
-        da1 = w2.T @ d_pred
+        da1 = w2.T @ d_pred  #deriviate of the loss by a1
+        dz1 = da1 * (z1 > 0) 
 
-        dz1 = da1 * (z1 > 0)
-        db1 = dz1
+        db1 = dz1 
         dw1 = np.outer(dz1, x)
        
         
