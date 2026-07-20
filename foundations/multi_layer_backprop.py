@@ -25,7 +25,7 @@ class Solution:
         y_true = np.array(y_true)
         
         # ----------------------------------------------------
-        # (Forward Pass)
+        # (Forward Pass) linear+relu+predictions+loss
         # ----------------------------------------------------
         z1 = w1 @ x + b1
         a1 = np.maximum(0 , z1)
@@ -33,20 +33,20 @@ class Solution:
         Loss = np.mean((predictions - y_true)**2)
         print('done')
         # ----------------------------------------------------
-        # (Backward Pass)
+        # (Backward Pass) d_pred + d
         # ----------------------------------------------------
         n = len(y_true)
         d_pred  = (2/n)* (predictions-y_true)
 
-        dw2 = np.outer(d_pred, a1)
         db2 = d_pred
+        dw2 = np.outer(d_pred, a1)
          
         da1 = w2.T @ d_pred
 
         dz1 = da1 * (z1 > 0)
-
-        dw1 = np.outer(dz1, x)
         db1 = dz1
+        dw1 = np.outer(dz1, x)
+       
         
         return {
             'loss': float(np.round(Loss, 4)),
