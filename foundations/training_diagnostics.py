@@ -29,16 +29,6 @@ class Solution:
         return stats
 
 
-
-
-
-
-
-
-
-
-
-
     def compute_gradient_stats(self, model: nn.Module, x: torch.Tensor, y: torch.Tensor) -> List[Dict[str, float]]:
         # Forward + backward pass with nn.MSELoss
         # For each nn.Linear layer's weight gradient, record: mean, std, norm
@@ -59,32 +49,21 @@ class Solution:
         return stats
 
 
-
-
-
-
-
-
-
-
-
-
-
     def diagnose(self, activation_stats: List[Dict[str, float]], gradient_stats: List[Dict[str, float]]) -> str:
         # Classify network health based on the stats
         # Return: 'dead_neurons', 'exploding_gradients', 'vanishing_gradients', or 'healthy'
         # Check in priority order (see problem description for thresholds)
         for s in activation_stats:
-            if s['dead_fraction']> 0.5:
+            if s['dead_fraction'] > 0.5:
                 return 'dead_neurons'
         for s in gradient_stats:        
-            if s['norm'] >1000:
+            if s['norm'] > 1000:
                 return 'exploding_gradients' 
 
         if gradient_stats and gradient_stats[-1]['norm'] < 1e-5:
                 return 'vanishing_gradients'
         for s in activation_stats:
-            if  s['std']<0.1:
+            if  s['std'] < 0.1:
                 return 'vanishing_gradients'
             if s['std'] > 10.0:
                 return 'exploding_gradients' 
