@@ -22,9 +22,10 @@ class Solution:
         
         for _ in range(epochs):
              y_hat = X@w + b
-             L = (1/num_samples) * np.sum((y_hat - y)**2)
-             grad_w = (2 / num_samples) * (X.T @ (y_hat - y))
-             grad_b = (2/num_samples) * (np.sum(y_hat - y))
+             error = (y_hat - y)
+             L = (1/num_samples) * np.sum(error**2)
+             grad_w = (2 / num_samples) * (X.T @ error)
+             grad_b = (2/num_samples) * (np.sum(error))
              w = w - lr*grad_w
              b = b - lr*grad_b
         w= np.round(w.flatten() , 5)
