@@ -20,7 +20,7 @@ class SingleHeadAttention(nn.Module):
         V=self.value(embedded) #(V=X*WV)
 
         # 2. Compute attention scores: (Q @ K^T) / sqrt(attention_dim)
-        attetion_dim = K.shape[-1] #HOW MANY ROWS
+        attetion_dim = K.shape[2] #HOW MANY ROWS
         scores = (Q @ K.transpose(-1,1))/(attention_dim**0.5)
         # 3. Apply causal mask: use torch.tril(torch.ones(...)) to build lower-triangular matrix,
         seq_len = embedded.shape[1] #HOW MANY COLUMNS
