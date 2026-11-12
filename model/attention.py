@@ -28,8 +28,10 @@ class SingleHeadAttention(nn.Module):
     
         #    then masked_fill positions where mask == 0 with float('-inf')
         scores  = scores.masked_fill(mask==0, float('-inf'))
+
         # 4. Apply softmax(dim=2) to masked scores
         attention_weights = torch.softmax(scores, dim=2)
+        
         # 5. Return (scores @ V) rounded to 4 decimal places
         output = attention_weights@V
         return torch.round(output*10000)/10000
