@@ -23,3 +23,9 @@ class Solution(nn.Module):
         x = self.sigmoid(x)
 
         return torch.round(x*10000)/10000
+
+        
+
+
+
+
