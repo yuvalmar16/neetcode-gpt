@@ -12,10 +12,10 @@ class Solution:
         # - X has shape (batch_size, context_length)
         # - Y has shape (batch_size, context_length)
         # - Y is X shifted right by 1 (Y[i][j] = data[start_i + j + 1])
-        #
+        
         # Use torch.manual_seed(0) before generating random start indices
         # Use torch.randint to pick random starting positions
-        
+
         # Fix the random number generator seed so the random batch indices are reproducible across runs
         torch.manual_seed(0)
 
